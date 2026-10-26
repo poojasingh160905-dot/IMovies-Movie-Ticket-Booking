@@ -51,10 +51,14 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(`\n======================================================`);
-  console.log(`🎬 IMovies Backend running in ${process.env.NODE_ENV || 'development'} mode`);
-  console.log(`🚀 API Base URL: http://localhost:${PORT}/api`);
-  console.log(`🩺 Health Check: http://localhost:${PORT}/api/health`);
-  console.log(`======================================================\n`);
-});
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`\n======================================================`);
+    console.log(`🎬 IMovies Backend running in ${process.env.NODE_ENV || 'development'} mode`);
+    console.log(`🚀 API Base URL: http://localhost:${PORT}/api`);
+    console.log(`🩺 Health Check: http://localhost:${PORT}/api/health`);
+    console.log(`======================================================\n`);
+  });
+}
+
+module.exports = app;
